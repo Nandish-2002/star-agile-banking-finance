@@ -1,41 +1,49 @@
-pipeline{
-agent any stages{
-stage('checkout the code from github'){
-steps{
- git url: 'https://github.com/sumitsingh231/Banking-java-project/'
- echo 'github url checkout'
- }
-}
+pipeline {
+    agent any  // Define where the pipeline will run
 
-stage('codecompile with Nandish'){
- steps{
-  echo 'starting compiling'
- sh 'mvn compile'
- }
-}
-stage('codetesting with Nandish'){ 
- steps{
-  sh 'mvn test'
- }
-}
+    stages {  // Define the stages block which contains individual stages
+        stage('Checkout the code from GitHub') {
+            steps {
+                // Checkout the code from the specified GitHub repository
+                git url: 'https://github.com/Nandish-2002/star-agile-banking-finance'
+                echo 'GitHub URL checkout'
+            }
+        }
 
-stage('qa with Nandish'){
-steps{
-sh 'mvn checkstyle:checkstyle'
- }
-}
+        stage('Code compile with Nandish') {
+            steps {
+                // Compile the code using Maven
+                echo 'Starting compilation'
+                sh 'mvn compile'
+            }
+        }
 
-stage('package with sumit'){
- steps{
-  sh 'mvn package'
- }
-}
+        stage('Code testing with Nandish') {
+            steps {
+                // Run tests using Maven
+                sh 'mvn test'
+            }
+        }
 
-stage('run dockerfile'){ 
- steps{
-  sh 'docker build -t myimg .'
-   }
-  }
+        stage('QA with Nandish') {
+            steps {
+                // Run Checkstyle analysis
+                sh 'mvn checkstyle:checkstyle'
+            }
+        }
 
- }
+        stage('Package with Sumit') {
+            steps {
+                // Package the code using Maven
+                sh 'mvn package'
+            }
+        }
+
+        stage('Run Dockerfile') {
+            steps {
+                // Build the Docker image
+                sh 'docker build -t myimg .'
+            }
+        }
+    }
 }
