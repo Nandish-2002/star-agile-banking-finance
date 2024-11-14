@@ -32,7 +32,7 @@ pipeline {
             }
         }
 
-        stage('Package with Sumit') {
+        stage('Package with Nandish') {
             steps {
                 // Package the code using Maven
                 sh 'mvn package'
