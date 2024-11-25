@@ -13,5 +13,5 @@
     command : sudo systemctl start docker
 
   - name: Deploy Docker Container
-    command: docker run -itd --rm -p 8088:8064 nandish1208/myproject:1.0
+    command: docker run -itd --rm -p 8084:8081 nandish1208/myproject:1.0
 
