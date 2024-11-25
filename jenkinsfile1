@@ -1,49 +1,37 @@
-pipeline {
-    agent any  // Define where the pipeline will run
-
-    stages {  // Define the stages block which contains individual stages
-        stage('Checkout the code from GitHub') {
-            steps {
-                // Checkout the code from the specified GitHub repository
-                git url: 'https://github.com/Nandish-2002/star-agile-banking-finance'
-                echo 'GitHub URL checkout'
-            }
-        }
-
-        stage('Code compile with Nandish') {
-            steps {
-                // Compile the code using Maven
-                echo 'Starting compilation'
-                sh 'mvn compile'
-            }
-        }
-
-        stage('Code testing with Nandish') {
-            steps {
-                // Run tests using Maven
-                sh 'mvn test'
-            }
-        }
-
-        stage('QA with Nandish') {
-            steps {
-                // Run Checkstyle analysis
-                sh 'mvn checkstyle:checkstyle'
-            }
-        }
-
-        stage('Package with Nandish') {
-            steps {
-                // Package the code using Maven
-                sh 'mvn package'
-            }
-        }
-
-        stage('Run Dockerfile') {
-            steps {
-                // Build the Docker image
-                sh 'docker build -t myimg .'
-            }
-        }
-    }
+pipeline { 
+    agent any 
+    stages { 
+        stage('checkout the code from github') { 
+            steps { 
+                git url: 'https://github.com/Nandish-2002/star-agile-banking-finance' 
+                echo 'github url checkout' 
+            } 
+        } 
+        stage('codecompile with nandish') { 
+            steps { 
+                echo 'starting compiling' 
+                sh 'mvn compile' 
+            } 
+        } 
+        stage('codetesting with nandish') { 
+            steps { 
+                sh 'mvn test' 
+            } 
+        } 
+        stage('qa with nandish') { 
+            steps { 
+                sh 'mvn checkstyle:checkstyle' 
+            } 
+        } 
+        stage('package with nandish') { 
+            steps { 
+                sh 'mvn package' 
+            } 
+        } 
+        stage('run dockerfile') { 
+            steps { 
+                sh 'docker build -t myimg .' 
+            } 
+        } 
+    } 
 }
