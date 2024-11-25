@@ -1,34 +1,16 @@
-- name: Configure Docker on EC2 Instances
-  hosts: all
+- name : Configure Docker on EC2 Instances
+  hosts : all
   become: true
-  connection: ssh
-  tasks:
-    - name: Updating apt repository
-      apt:
-        update_cache: yes
+  connection : ssh
+  tasks : 
+  - name: updating apt
+    command : sudo apt-get update
 
-    - name: Install Docker
-      apt:
-        name: docker.io
-        state: present
+  - name : Install Docker
+    command : sudo apt-get install -y docker.io
 
-    - name: Start Docker Service
-      systemd:
-        name: docker
-        state: started
-        enabled: yes
+  - name : Start Docker Service
+    command : sudo systemctl start docker
 
-    - name: Pull Docker Image
-      docker_image:
-        name: nandish1208/myproject
-        tag: "1"
-        source: pull
-
-    - name: Deploy Docker Container
-      docker_container:
-        name: myproject_container
-        image: nandish1208/myproject:1
-        state: started
-        restart_policy: always
-        published_ports:
-          - "8088:8064"
+  - name: Deploy Docker Container
+    command: docker run -itd -p 8088:8064 nandish1208/myproject:1
